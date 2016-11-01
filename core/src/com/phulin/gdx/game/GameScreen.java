@@ -64,7 +64,7 @@ public class GameScreen extends ScreenAdapter {
 		SpriteBatch batch = musicGame.batch;
 		worldRenderer.render(delta);
 		x = 0;
-        y = 50;
+        y = 40;
         batch.begin();
         for(int i = 0; i < 5; i++){
         	x = (i*120);
