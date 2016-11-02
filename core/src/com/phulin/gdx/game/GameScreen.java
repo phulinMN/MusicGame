@@ -4,7 +4,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.audio.Music;
-import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -15,15 +14,12 @@ public class GameScreen extends ScreenAdapter {
 	private WorldRenderer worldRenderer;
 	private Tabplay tabplay;
 	private int x;
-	private Music babab;
 	
 	public GameScreen(MusicGame musicGame){
 		this.musicGame = musicGame;
 		tapImg = new Texture("tapb.png");
 		worldRenderer = new WorldRenderer(musicGame);
 		tabplay = new Tabplay(musicGame);
-		Music music = Gdx.audio.newMusic(Gdx.files.internal("twinkle.mp3"));
-		music.play();
 	}
 	
 	public void ControlKey(float delta){

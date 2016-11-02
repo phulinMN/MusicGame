@@ -9,44 +9,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 public class Tabplay {
 	private MusicGame musicGame;
 	private Texture tabplayImg;
-	private String [] Bar = new String[] {
-			"*-***",
-			"-****",
-			"**-**",
-			"***-*",
-			"****-",
-			"*-***",
-			"*****",
-			"*****",
-			"-***-",
-			"*-***",
-			"-****",
-			"**-**",
-			"***-*",
-			"****-",
-			"*-***",
-			"*****",
-			"*****",
-			"-***-",
-			"*-***",
-			"-****",
-			"**-**",
-			"***-*",
-			"****-",
-			"*-***",
-			"*****",
-			"*****",
-			"-***-",
-			"*-***",
-			"-****",
-			"**-**",
-			"***-*",
-			"****-",
-			"*-***",
-			"*****",
-			"*****",
-			"-***-",
-			"-**-*"};
+	private NoteNSong noteNSong;
 	//private String [] Bar = new String[] { "-****" };
 	public int x = 0;
 	public int y;
@@ -62,14 +25,15 @@ public class Tabplay {
 	public Tabplay(MusicGame musicGame){
 		this.musicGame = musicGame;
 		tabplayImg = new Texture("tapb.png");
+		noteNSong = new NoteNSong(musicGame);
 	}
 	
 	public boolean hasBarAt(int r, int c) {
-        return Bar[r].charAt(c) == '-';
+        return noteNSong.NOTE[r].charAt(c) == '-';
     }
  
     public boolean hasDotAt(int r, int c) {
-        return Bar[r].charAt(c) == '*';
+        return noteNSong.NOTE[r].charAt(c) == '*';
     }
     
     public void update(float delta){
@@ -116,7 +80,7 @@ public class Tabplay {
 	public void render(float delta){
 		SpriteBatch batch = musicGame.batch;
         batch.begin();
-    	for(int r = 0; r < Bar.length ; r++){
+    	for(int r = 0; r < noteNSong.NOTE.length ; r++){
     		for(int c = 0; c < 5; c++){
     			x = (c*120);
     			y = 760 + r*40 - k*SPEED;
@@ -124,8 +88,6 @@ public class Tabplay {
     				batch.draw(tabplayImg, x, y);
     			}
     			checkTap(r,c);
-//    			System.out.println(x);
-//    			System.out.println(y);
     		}
     	}
     	update(delta);
