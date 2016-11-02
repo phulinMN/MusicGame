@@ -20,6 +20,7 @@ public class GameScreen extends ScreenAdapter {
 		tapImg = new Texture("tapb.png");
 		worldRenderer = new WorldRenderer(musicGame);
 		tabplay = new Tabplay(musicGame);
+
 	}
 	
 	public void ControlKey(float delta){

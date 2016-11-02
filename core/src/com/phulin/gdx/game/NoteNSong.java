@@ -6,6 +6,45 @@ import com.badlogic.gdx.audio.Music;
 public class NoteNSong {
 	private MusicGame musicGame;
 	public String [] NOTE = new String[] {
+			"-----",
+			"*-***",
+			"-****",
+			"**-**",
+			"***-*",
+			"****-",
+			"*-***",
+			"*****",
+			"*****",
+			"-***-",
+			"*-***",
+			"-****",
+			"**-**",
+			"***-*",
+			"****-",
+			"*-***",
+			"*****",
+			"*****",
+			"-***-",
+			"*-***",
+			"-****",
+			"**-**",
+			"***-*",
+			"****-",
+			"*-***",
+			"*****",
+			"*****",
+			"-***-",
+			"*-***",
+			"-****",
+			"**-**",
+			"***-*",
+			"****-",
+			"*-***",
+			"*****",
+			"*****",
+			"-***-",
+			"-**-*",
+			"-----",
 			"*-***",
 			"-****",
 			"**-**",
@@ -52,7 +91,8 @@ public class NoteNSong {
         return NOTE[r].charAt(c) == '*';
     }
 	public NoteNSong(MusicGame musicGame){
-		Music music = Gdx.audio.newMusic(Gdx.files.internal("twinkle.mp3"));
+		Music music = Gdx.audio.newMusic(Gdx.files.internal("Can Can remix.mp3"));
+		music.pause();
 		music.play();
 	}
 }
