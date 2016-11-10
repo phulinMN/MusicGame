@@ -20,8 +20,10 @@ public class Tabplay {
 	boolean SPACE_ISPRESS = false;
 	boolean J_ISPRESS = false;
 	boolean K_ISPRESS = false;
-	private boolean isClick = true;
 	private boolean [] check = new boolean[5];
+	private boolean press = false;
+	public Score score;
+	int D_point;
 	
 	
 	public Tabplay(MusicGame musicGame){
@@ -29,6 +31,11 @@ public class Tabplay {
 		tabplayImg = new Texture("tapb.png");
 		touchImg = new Texture("tapspace.png");
 		noteNSong = new NoteNSong(musicGame);
+		score = new Score(musicGame);
+	}
+	
+	Score getScore() {
+		return score;
 	}
 	
 	NoteNSong getNote(){
@@ -45,48 +52,70 @@ public class Tabplay {
     
     public void update(float delta){
     	k++;
+    	score.isMiss();
+    	score.isPerfect();
     }
+    
+    public void isCheck(int r, int c){
+   		if(hasBarAt(r,c)){
+   			D_point++;
+   			System.out.println("OK");
+   		}
+   		else{
+   			score.m++;
+   			System.out.println("Miss");
+   		}
+  	}
     
     public void checkTap(int r, int c){
     	if(D_ISPRESS && x == 0 && y<=80 && y>=40){
-    		System.out.println("OK D");
     		check[0] = true;
+    		press = false;
+    		isCheck(r,c);
     	}
     	else if(D_ISPRESS){
     		check[0] = false;
-    		//System.out.println("MISS D");
+    		press = true;
+    		if ( D_point > 0) {
+    			score.p++;
+    			D_point = 0;
+    		}
     	}
     	if(F_ISPRESS && x == 120 && y<=80 && y>=40){
-    		System.out.println("OK F");
     		check[1] = true;
+    		press = false;
+    		isCheck(r,c);
     	}
     	else if(F_ISPRESS){
-    		//System.out.println("MISS F");
     		check[1] = false;
+    		press = true;
     	}
     	if(SPACE_ISPRESS && x == 240 && y<=80 && y>=40){
-    		System.out.println("OK SPACE");
     		check[2] = true;
+    		press = false;
+    		isCheck(r,c);
     	}
     	else if(SPACE_ISPRESS){
-    		//System.out.println("MISS SPACE");
     		check[2] = false;
+    		press = true;
     	}
     	if(J_ISPRESS && x == 360 && y<=80 && y>=40){
-    		System.out.println("OK J");
     		check[3] = true;
+    		press = false;
+    		isCheck(r,c);
     	}
     	else if(J_ISPRESS){
-    		//System.out.println("MISS J");
     		check[3] = false;
+    		press = true;
     	}
     	if(K_ISPRESS && x == 480 && y<=80 && y>=40){
-    		System.out.println("OK K");
     		check[4] = true;
+    		press = false;
+    		isCheck(r,c);
     	}
     	else if(K_ISPRESS){
-    		//System.out.println("MISS K");
     		check[4] = false;
+    		press = true;
     	}
     }
 	
@@ -104,26 +133,9 @@ public class Tabplay {
     			if(check[c]){
     				batch.draw(touchImg, x, 40);
     			}
-//    			if(D_ISPRESS){
-//    	    		batch.draw(touchImg, 0, 40);
-//    	    	}
-//    			else if(F_ISPRESS){
-//    	    		batch.draw(touchImg, 120, 40);
-//    	    	}
-//    			else if(SPACE_ISPRESS){
-//    	    		batch.draw(touchImg, 240, 40);
-//    	    	}
-//    			else if(J_ISPRESS){
-//    	    		batch.draw(touchImg, 360, 40);
-//    	    	}
-//    			else if(K_ISPRESS){
-//    	    		batch.draw(touchImg, 480, 40);
-//    	    	}
     		}
     	}
     	update(delta);
         batch.end();
     }	
-	
-
 }
