@@ -17,6 +17,7 @@ public class GameScreen extends ScreenAdapter {
 	private int x;
 	private Score score;
 	private BitmapFont font;
+	private boolean [] press = new boolean[5];
 	
 	public GameScreen(MusicGame musicGame){
 		this.musicGame = musicGame;
@@ -29,22 +30,19 @@ public class GameScreen extends ScreenAdapter {
 
 	public void ControlKey(float delta){
     		if(Gdx.input.isKeyJustPressed(Keys.D)){
-    			tabplay.D_ISPRESS = true;
-    			//System.out.println("OK D");
+    			tabplay.D_ISPRESS = true;			
     		}
     		if(!Gdx.input.isKeyJustPressed(Keys.D)){
     			tabplay.D_ISPRESS = false;
     		}
     		if(Gdx.input.isKeyJustPressed(Keys.F)){
     			tabplay.F_ISPRESS = true;
-    			//System.out.println("OK F");
     		}
     		if(!Gdx.input.isKeyJustPressed(Keys.F)){
     			tabplay.F_ISPRESS = false;
     		}
     		if(Gdx.input.isKeyJustPressed(Keys.SPACE)){
     			tabplay.SPACE_ISPRESS = true;
-    			//System.out.println("OK SPACE");
     		}
     		if(!Gdx.input.isKeyJustPressed(Keys.SPACE)){
     			tabplay.SPACE_ISPRESS = false;
@@ -62,10 +60,6 @@ public class GameScreen extends ScreenAdapter {
     			tabplay.K_ISPRESS = false;
     		}
 	}
-		
-//	public void Check(){
-//		if
-//	}
 		
 	@Override
     public void render(float delta) {
