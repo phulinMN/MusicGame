@@ -11,9 +11,9 @@ public class Tabplay {
 	private Texture tabplayImg;
 	private NoteNSong noteNSong;
 	public int x = 0;
-	public int y;
+	public double y;
 	private int k = 0;
-	static int SPEED = 2;
+	static double SPEED = 1.62;
 	int D = 0;
 	int F = 1;
 	int S = 2;
@@ -40,6 +40,10 @@ public class Tabplay {
 		return noteNSong;
 	}
 	
+	double getY(){
+		return y;
+	}
+	
 	public boolean hasBarAt(int r, int c) {
         return noteNSong.NOTE[r].charAt(c) == '-';
     }
@@ -52,6 +56,7 @@ public class Tabplay {
     	k++;
     	score.isMiss();
     	score.isPerfect();
+    	noteNSong.update(delta);
     }
     
     public void isCheck(int botton,int r, int c){
@@ -93,7 +98,7 @@ public class Tabplay {
     			x = (c*120);
     			y = 760 + r*40 - k*SPEED;
     			if(hasBarAt(r,c)){
-    				batch.draw(tabplayImg, x, y);
+    				batch.draw(tabplayImg, x, (float) y);
     			}
     			checkTap(r,c);
     		}
