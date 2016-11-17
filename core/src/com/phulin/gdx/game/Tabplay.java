@@ -9,29 +9,25 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 public class Tabplay {
 	private MusicGame musicGame;
 	private Texture tabplayImg;
-	private Texture touchImg;
 	private NoteNSong noteNSong;
 	public int x = 0;
 	public int y;
 	private int k = 0;
 	static int SPEED = 2;
-	boolean D_ISPRESS = false;
-	boolean F_ISPRESS = false;
-	boolean SPACE_ISPRESS = false;
-	boolean J_ISPRESS = false;
-	boolean K_ISPRESS = false;
-	private boolean [] check = new boolean[5];
+	int D = 0;
+	int F = 1;
+	int S = 2;
+	int J = 3;
+	int K = 4;
+	boolean [] Key = new boolean [5];
+	boolean [] check = new boolean[5];
 	public Score score;
-	int D_point;
-	int F_point;
-	int SPACE_point;
-	int J_point;
-	int K_point;
+	int [] point = new int [5];
+	int [] miss = new int [5];
 	
 	public Tabplay (MusicGame musicGame) {
 		this.musicGame = musicGame;
 		tabplayImg = new Texture("tapb.png");
-		touchImg = new Texture("tapspace.png");
 		noteNSong = new NoteNSong(musicGame);
 		score = new Score(musicGame);
 	}
@@ -58,73 +54,35 @@ public class Tabplay {
     	score.isPerfect();
     }
     
-    public void isCheck(int r, int c){
-   		if(hasBarAt(r,c)){
-   			D_point++;
+    public void isCheck(int botton,int r, int c){
+ 		if(hasBarAt(r,c)){
+ 			point[botton]++;
    			System.out.println("OK");
    		}
    		else{
-   			score.m++;
+   			miss[botton]++;
    			System.out.println("Miss");
    		}
   	}
     
     public void checkTap(int r, int c){
-    	if(D_ISPRESS && x == 0 && y<=80 && y>=40){
-    		check[0] = true;
-    		isCheck(r,c);
-    	}
-    	else if(D_ISPRESS){
-    		check[0] = false;
-    		if ( D_point > 0) {
-    			score.p++;
-    			D_point = 0;
+    	for(int i = 0; i < Key.length; i++){
+    		if(Key[i] && x == i*120 && y >= 40 && y <= 80){
+    			check[i] = true;
+    			isCheck(i,r,c);
     		}
-    	}
-    	if(F_ISPRESS && x == 120 && y<=80 && y>=40){
-    		check[1] = true;
-    		isCheck(r,c);
-    	}
-    	else if(F_ISPRESS){
-    		check[1] = false;
-    		if ( F_point > 0) {
-    			score.p++;
-    			F_point = 0;
+    		else if (!Key[i]){
+    			check[i] = false;
+    			if(point[i] > 0){
+    				score.p++;
+    				point[i] = 0;
+    			}
+    			if(miss[i] > 0){
+    				score.m++;
+    				miss[i] = 0;
+    			}
     		}
-    	}
-    	if(SPACE_ISPRESS && x == 240 && y<=80 && y>=40){
-    		check[2] = true;
-    		isCheck(r,c);
-    	}
-    	else if(SPACE_ISPRESS){
-    		check[2] = false;
-    		if ( SPACE_point > 0) {
-    			score.p++;
-    			SPACE_point = 0;
-    		}
-    	}
-    	if(J_ISPRESS && x == 360 && y<=80 && y>=40){
-    		check[3] = true;
-    		isCheck(r,c);
-    	}
-    	else if(J_ISPRESS){
-    		check[3] = false;
-    		if ( J_point > 0) {
-    			score.p++;
-    			J_point = 0;
-    		}
-    	}
-    	if(K_ISPRESS && x == 480 && y<=80 && y>=40){
-    		check[4] = true;
-    		isCheck(r,c);
-    	}
-    	else if(K_ISPRESS){
-    		check[4] = false;
-    		if ( K_point > 0) {
-    			score.p++;
-    			K_point = 0;
-    		}
-    	}
+      	}
     }
 	
 	public void render(float delta){
@@ -138,9 +96,6 @@ public class Tabplay {
     				batch.draw(tabplayImg, x, y);
     			}
     			checkTap(r,c);
-    			if(check[c]){
-    				batch.draw(touchImg, x, 40);
-    			}
     		}
     	}
     	update(delta);

@@ -6,6 +6,15 @@ import com.badlogic.gdx.audio.Music;
 public class NoteNSong {
 	private MusicGame musicGame;
 	public String [] NOTE = new String[] {
+			"*****",
+			"*****",
+			"*****",
+			"*****",
+			"*****",
+			"*****",
+			"*****",
+			"*****",
+			"*****",
 			"-----",
 			"*-***",
 			"*****",
